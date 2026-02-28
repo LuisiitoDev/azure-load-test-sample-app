@@ -30,6 +30,12 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      # ADD THIS DEBUG STEP
+      - name: Verify Auth Context
+        run: |
+          az account show
+          az provider show -n Microsoft.LoadTestService --query registrationState
+
       # Run the load test
       - name: Azure Load Testing
         uses: azure/load-testing@v1.1.27
